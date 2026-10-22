@@ -1,4 +1,5 @@
-import qi
+from __future__ import print_function
+
 import threading
 import time
 
@@ -20,6 +21,7 @@ class PeoplePerception:
     """ Initialising the class variables"""
 
     def __init__(self, pepper):
+        self._detection_resources_active = False
         self.subscribers_list = []
         self.is_speech_recognition_started = False
         self.last_detected_person = 0
@@ -38,16 +40,16 @@ class PeoplePerception:
     """ Starts the face detection method"""
 
     def process_face_detection(self):
+        import qi
         last_detected_face = None
         while self.detection_started:
             time.sleep(0.5)
             try:
                 val = self.memory_service.getData("FaceDetected", 0)
-                print(val)
-            except:
-                if self.pepper:
-                    self.pepper.checkConnection()
-                continue
+            except Exception:
+                self.detection_started = False
+                print("Face detection stopped after a robot-service error")
+                return
 
             # Check if we find some face
             if val and isinstance(val, list) and len(val) > 0:
@@ -77,7 +79,10 @@ class PeoplePerception:
     """ Starting detection method """
 
     def start_detection(self):
+        if self.detection_started:
+            return
         self.detection_started = True
+        self._detection_resources_active = True
         # Starts Awareness method
         self.ba_service.startAwareness()
         # Starts the method of the API
@@ -85,7 +90,9 @@ class PeoplePerception:
         self.face_detection_service.subscribe("Test_Face", 500, 0.0)
         PeoplePerception.start_face_tracking(self)
 
-        threading.Thread(target=self.process_face_detection).start()
+        worker = threading.Thread(target=self.process_face_detection)
+        worker.daemon = True
+        worker.start()
 
     """ Creating a callback method for detected faces"""
 
@@ -101,8 +108,15 @@ class PeoplePerception:
 
     def stop_detection(self):
         self.detection_started = False
-        PeoplePerception.stop_face_tracking(self)
-        self.ba_service.stopAwareness()
+        self._detection_resources_active = False
+        for cleanup in (
+                lambda: self.face_detection_service.unsubscribe("Test_Face"),
+                self.stop_face_tracking,
+                self.ba_service.stopAwareness):
+            try:
+                cleanup()
+            except Exception:
+                pass
 
     """ Starts face tracking method """
 
@@ -138,7 +152,7 @@ class PeoplePerception:
 
     def on_human_tracked(self, value):
         if value >= 0 and value != self.last_detected_person:  # found a new person
-            print "got HumanTracked: detected person with ID:", str(value)
+            print("got HumanTracked: detected person with ID:", str(value))
 
             if self.pepper.mode == "entrance_mode":
                 self.pepper.speech().random_language()
@@ -152,14 +166,14 @@ class PeoplePerception:
 
             position_human = self.get_people_perception_data(value)
             [x, y, z] = position_human
-            print "The tracked person with ID", value, "is at the position:", \
-                "x=", x, "/ y=", y, "/ z=", z
+            print("The tracked person with ID", value, "is at the position:", \
+                "x=", x, "/ y=", y, "/ z=", z)
 
     """ callback for event PeopleLeft """
 
     def on_people_left(self, value):
 
-        print "got PeopleLeft: lost person", str(value)
+        print("got PeopleLeft: lost person", str(value))
 
     """ Getting data on the tracked person"""
 

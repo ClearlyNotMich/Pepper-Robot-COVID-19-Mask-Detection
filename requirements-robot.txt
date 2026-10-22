@@ -1,0 +1,3 @@
+# Legacy MQTT API used by this NAOqi Python 2.7 application.
+# Paho 1.6.1 supports Python 2.7.9+; this does not install the vendor SDK.
+paho-mqtt==1.6.1

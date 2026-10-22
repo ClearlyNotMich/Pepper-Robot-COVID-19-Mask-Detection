@@ -1,0 +1,18 @@
+# Local credentials and deployment configuration
+.env
+.env.*
+!.env.example
+tools/clients.json
+tools/config.local.json
+tablet_website/config.local.json
+hva_scanner/secrets.h
+
+# Local tooling and generated output
+.idea/
+.vscode/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+.DS_Store

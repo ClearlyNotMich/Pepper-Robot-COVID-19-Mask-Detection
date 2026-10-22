@@ -2,15 +2,10 @@
 #include <PubSubClient.h>
 #include <SimpleKalmanFilter.h>
 
-#define WIFI_SSID "IoT"
-#define WIFI_PASSWORD ""
+// Copy secrets.example.h to ignored secrets.h and configure this device locally.
+#include "secrets.h"
 
-#define MQTT_HOST "mqtt.hva-robots.nl"
-#define MQTT_PORT 1883
-#define MQTT_CLIENT_ID "hva_scan"
-#define MQTT_USERNAME "hva_scan"
-#define MQTT_PASSWORD ""
-#define MQTT_TOPIC "robots/mirai/scan"
+
 
 #define STATE_PUBLISH_TIME 5000
 

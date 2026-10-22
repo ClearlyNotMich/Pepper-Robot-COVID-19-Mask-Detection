@@ -1,77 +1,26 @@
-.button1 {
-  background-color: #4CAF50;
-  border: none;
-  color: white;
-  padding: 70px 100px;;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 80px;
-  margin: 4px 2px;
-  cursor: pointer;
-}
-
-.button2 {background-color: #f44336;
-  border: none;
-  color: white;
-  padding: 70px 100px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 80px;
-  margin: 4px 2px;
-  cursor: pointer;
-}
-
-a {
-    color: whitesmoke;
-    text-decoration: none;
-}
-
-a:hover {
-    color: gray;
-    text-decoration:none;
-    cursor:pointer;
-}
-
-h1 {
-    font-family: Arial;
-    position: relative;
-    top: 70px;
-    text-align: center;
-}
-
-h3 {
-    position: absolute;
-    font-size: 130%;
-    top: 0;
-    left: 5px;
-}
-
-#hvaLogo {
-    position: absolute;
-    top: 13px;
-    left: 300px;
-    height: 35px;
-    width: 35px;
-}
-
-
-.button1 {
-    margin: 0;
-    position: fixed;
-    top: 180px;
-    left: 105px;
-}
-.button2 {
-    margin: 0;
-    position: fixed;
-    top: 180px;
-    right: 105px;
-}
-#button3 {
-    margin: 0;
-    position: fixed;
-    top: 10px;
-    right: 50px;
-}
+* { box-sizing: border-box; }
+body { margin: 0; color: #203137; background: #f5f7f7; font: 18px/1.5 Arial, sans-serif; }
+header { display: flex; align-items: center; gap: 14px; background: #fff; padding: 18px 5%; border-bottom: 3px solid #4caf50; }
+header img { width: 38px; height: 38px; object-fit: contain; }
+main { max-width: 1050px; margin: 32px auto; padding: 0 24px 48px; }
+h1 { font-size: clamp(26px, 4vw, 40px); line-height: 1.2; }
+h2 { font-size: 24px; }
+nav { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 30px; }
+a { color: #175f44; }
+section { background: white; border: 1px solid #d7e0dd; border-radius: 10px; padding: 24px; margin: 24px 0; }
+fieldset { border: 1px solid #d7e0dd; padding: 18px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+label { display: flex; flex-direction: column; gap: 5px; }
+input { width: 100%; min-width: 0; padding: 10px; font: inherit; border: 1px solid #879b93; border-radius: 4px; }
+.full { grid-column: 1 / -1; }
+.check { flex-direction: row; align-items: center; }
+.check input { width: auto; }
+.controls, .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+button { cursor: pointer; font: inherit; padding: 14px 24px; border: 0; border-radius: 5px; background: #216b4d; color: white; }
+.actions button { font-size: 23px; }
+button.stop { background: #a93737; }
+button:disabled { background: #dce3df; color: #53615b; cursor: not-allowed; }
+button:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid #207ab0; outline-offset: 3px; }
+.hint { font-size: 15px; color: #52645c; }
+pre { white-space: pre-wrap; overflow-wrap: anywhere; }
+.floorplan { display: block; max-width: 100%; height: auto; margin-top: 24px; }
+@media (max-width: 600px) { fieldset { grid-template-columns: 1fr; } section { padding: 16px; } }

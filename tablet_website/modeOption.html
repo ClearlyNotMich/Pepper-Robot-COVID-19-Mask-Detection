@@ -1,34 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="src/stylesheet.css">
-</head>
-    <body>
-        <!--
-        Headers for basic messages displayed on website
-        -->
-        <h3> Hogeschool van Amsterdam</h3>
-
-        <!--
-        Imports images for the webpage
-        -->
-        <img id="hvaLogo" src="src/Hogeschool_van_amsterdam_logo_svg.png"/>
-
-        <!--
-        Makes interactable button and a class that refers to other files
-        -->
-        <button onclick="Surveillance_mode()" class="surveillance"><a href="surveillanceMode.html">Surveillance_mode</a></button>
-        <button onclick="Entrance_mode()" class="entrance"><a href="entranceMode.html">Entrance_mode</a></button>
-        <div id="button3"><a href="tablet.html">Terug</a></div>
-
-        <!--
-        Imports javascripts used for MQTT
-        -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
-        <script src="src/mqtt-client.js" type="text/javascript"></script>
-        <script src="src/javascript.js" type="text/javascript"></script>
-
-    </body>
-</html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Mode selection</title><link rel="stylesheet" href="src/stylesheet.css"></head>
+<body><header><img src="src/Hogeschool_van_amsterdam_logo_svg.png" alt="Hogeschool van Amsterdam logo"><span>Hogeschool van Amsterdam · Pepper coursework</span></header>
+<main><h1>Choose a mode</h1><nav aria-label="Preview pages"><a href="tablet.html">Home</a><a href="modeOption.html">Modes</a><a href="entranceMode.html">Entrance preview</a><a href="surveillanceMode.html">Surveillance preview</a></nav>
+<section class="connection" aria-labelledby="connection-heading">
+<h2 id="connection-heading">Broker connection</h2>
+<p>Preview these pages offline. Connect only when you intend to control your configured robot.</p>
+<form id="connection-form" autocomplete="off">
+<fieldset id="connection-settings">
+<legend>Local connection settings</legend>
+<label class="full">Import settings (optional)<input id="config-file" type="file" accept=".json,application/json"></label>
+<label>Broker hostname<input id="broker-host" required placeholder="Your broker hostname" autocomplete="off"></label>
+<label>WebSocket port<input id="broker-port" type="number" min="1" max="65535" value="443" required></label>
+<label>WebSocket path<input id="broker-path" value="/mqtt" required></label>
+<label>Command topic<input id="command-topic" value="pepper/commands" required></label>
+<label>Username (if required)<input id="broker-username" autocomplete="off"></label>
+<label>Password (if required)<input id="broker-password" type="password" autocomplete="off"></label>
+<label class="check"><input id="broker-tls" type="checkbox" checked> Use TLS (wss)</label>
+</fieldset>
+<p class="hint">Credentials stay in memory for this connection. They are not saved in configuration or browser storage by this page.</p>
+<div class="controls"><button id="connect-button" type="submit">Connect</button><button id="disconnect-button" type="button" disabled>Disconnect</button></div>
+</form>
+<p id="connection-status" role="status">Offline preview. No broker connection.</p>
+</section>
+<section aria-labelledby="commands-heading"><h2 id="commands-heading">Robot commands</h2><p>Shut down robot sends the project's shutdown command. It is not an emergency stop.</p><div class="actions"><button data-command="surveillance_mode" disabled>Surveillance mode</button><button data-command="entrance_mode" disabled>Entrance mode</button><button class="stop" data-command="stop" disabled>Shut down robot</button></div><p id="command-status" role="status"></p><p>Last message on the command topic:</p><pre id="last-message" aria-live="polite"></pre></section>
+</main><script src="src/paho-mqtt.js"></script><script src="src/mqtt-client.js"></script><script src="src/javascript.js"></script></body></html>
