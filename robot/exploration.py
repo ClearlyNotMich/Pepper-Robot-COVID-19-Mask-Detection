@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 from random import uniform  # Enables for Float nummers
 
 THETA = 0  # pepper doesn't use the THETA variable, but still wants to have it selected.
@@ -27,7 +29,7 @@ class Exploration:
         error_code = self.exploration_service.explore(radius)
         print(error_code)
         if error_code != 0:
-            print "Exploration failed."
+            print("Exploration failed.")
             return
         return self
 
@@ -47,7 +49,7 @@ class Exploration:
         # Save the file of the map on the robot.
         path = self.exploration_service.saveExploration()
         # Tell us what the location of path is.
-        print ("Exploration saved at path: \"" + path + "\"")
+        print(("Exploration saved at path: \"" + path + "\""))
         return self
 
     """
@@ -58,14 +60,14 @@ class Exploration:
         self.exploration_service.navigateToInMap([horizontal, vertical, theta])
         # Points out in the console when the robot has arrived at the location.
         # Anything outside of the range selected in explore and robot skips it.
-        print" I have arrived at the new location."
+        print(" I have arrived at the new location.")
         return self
 
     """
     Stop the exploration of the surrounding. This is used if the user wants to interrupt midway of the exploring.
     """
     def get_robot_position_in_map(self):
-        print "I reached:" + str(self.exploration_service.getRobotPositionInMap()[0])
+        print("I reached:" + str(self.exploration_service.getRobotPositionInMap()[0]))
         return self
 
     """

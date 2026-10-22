@@ -1,0 +1,16 @@
+{
+  "robot_host": "robot.example.invalid",
+  "robot_port": 9559,
+  "tablet_url": "https://tablet.example.invalid/tablet.html",
+  "clients": [
+    {
+      "name": "robot-controls",
+      "host": "mqtt.example.invalid",
+      "port": 1883,
+      "username_env": "PEPPER_MQTT_USERNAME",
+      "password_env": "PEPPER_MQTT_PASSWORD",
+      "command_topic": "pepper/commands",
+      "topics": ["pepper/commands", "pepper/scanner"]
+    }
+  ]
+}

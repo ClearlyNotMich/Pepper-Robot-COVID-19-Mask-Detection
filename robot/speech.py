@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 from random import randint
 
 DEFAULT_PITCH = 1.2  # 1.2 is considered a normal pitch voice of the robot.
@@ -97,7 +99,7 @@ class Speech:
             Speech.it_intro(self)
         self.set_language("Dutch")  # Sets back to dutch for the future usage.
         # used to check which number the the robot randomly generates so we know what language corresponds to it.
-        print language_value
+        print(language_value)
         return self
 
     """Here the robot will tell random facts about the hva"""
