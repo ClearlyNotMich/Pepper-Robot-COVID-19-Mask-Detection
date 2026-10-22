@@ -102,6 +102,7 @@ SDK files, Eclipse Paho and institutional assets. No blanket license is assigned
 to the whole repository.
 
 Historical commits contain two exposed MQTT credentials. Their removal from the
-current configuration does not remove historical copies. Owner confirmation of
-revocation/rotation remains outstanding; see [credential cleanup](CREDENTIALS.md).
+current configuration does not remove historical copies. On 22 October 2026, the
+owner confirmed that both exposed credentials were revoked. No credentials were
+tested; see [credential cleanup](CREDENTIALS.md).
 
